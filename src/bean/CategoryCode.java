@@ -28,7 +28,17 @@ public enum CategoryCode {
     GRE(">",25),
     GEQ(">=",26),
     EQL("==",27),
-    NEQ("!=",28);
+    NEQ("!=",28),
+    ASSIGN("=",29),
+    SEMICN (";",30),
+    COMMA  (",",31),
+    LPARENT ("(",32),
+    RPARENT (")",33),
+    LBRACK("[",34),
+    RBRACK("]",35),
+    LBRACE("{",36),
+    RBRACE("}",37);
+
 
     private String ident;
     private int i;
