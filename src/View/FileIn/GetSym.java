@@ -83,9 +83,12 @@ public class GetSym {
                     //判断是否是 单字符 或 多字母、数字组成 的类别码
                     if(str.length() > 0) {
                         CatCode = CatCodeSer.isCatCodeServ(str);
-                        if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
-                        System.out.println(CatCode);
-                        System.out.println(str);}
+                        if(lab2)    {
+                            putState.PutAns(fw,labNum,CatCode,str.toString());
+                            str.delete(0,str.length());
+                            System.out.println(CatCode);
+                            System.out.println(str);
+                        }
                         //清空 str 读取下一个
                         str.delete(0,str.length());
                     }
@@ -95,42 +98,63 @@ public class GetSym {
                 //判断是否是 多字符 组成的类别码：
                 else if (ch == '&' && reader.read() == '&') {
                     CatCode = "AND";
-                    if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
-                    System.out.println(CatCode);
-                    System.out.println("&&");}
+                    str.append("&&");
+                    if(lab2)    {
+                        putState.PutAns(fw,labNum,CatCode,str.toString());
+                        str.delete(0,str.length());
+                        System.out.println(CatCode);
+                        System.out.println("&&");}
                     //跳过已经成功判断的字符
                 }
                 else if (ch == '|' && reader.read() == '|') {
                     CatCode = "OR";
-                    if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
-                    System.out.println(CatCode);
-                    System.out.println("||");}
+                    str.append("||");
+                    if(lab2)    {
+                        putState.PutAns(fw,labNum,CatCode,str.toString());
+                        str.delete(0,str.length());
+                        System.out.println(CatCode);
+                        System.out.println("||");
+                    }
                     //跳过已经成功判断的字符
                 }
                 else if(ch == '>' && reader.read() =='='){
                     CatCode = "GEQ";
-                    if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
-                    System.out.println(CatCode);
-                    System.out.println(">=");}
+                    str.append(">=");
+                    if(lab2) {
+                        putState.PutAns(fw,labNum,CatCode,str.toString());
+                        str.delete(0,str.length());
+                        System.out.println(CatCode);
+                        System.out.println(">=");
+                    }
                     //跳过已经成功判断的字符
                 }
                 else if(ch == '<' && reader.read() =='='){
                     CatCode = "LEQ";
-                    if(lab2){    putState.PutAns(fw,labNum,CatCode,str.toString());
-                    System.out.println(CatCode);
-                    System.out.println("<=");}
+                    str.append("<=");
+                    if(lab2){
+                        putState.PutAns(fw,labNum,CatCode,str.toString());
+                        str.delete(0,str.length());
+                        System.out.println(CatCode);
+                        System.out.println("<=");
+                    }
                     //跳过已经成功判断的字符
                 }
                 else if(ch == '=' && reader.read() =='='){
                     CatCode = "EQL";
-                    if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
-                    System.out.println(CatCode);
-                    System.out.println("==");}
+                    str.append("==");
+                    if(lab2)    {
+                        putState.PutAns(fw,labNum,CatCode,str.toString());
+                        str.delete(0,str.length());
+                        System.out.println(CatCode);
+                        System.out.println("==");
+                    }
                     //跳过已经成功判断的字符
                 }
                 else if(ch == '!' && reader.read() =='='){
                     CatCode = "NEQ";
+                    str.append("!=");
                     if(lab2)    {putState.PutAns(fw,labNum,CatCode,str.toString());
+                    str.delete(0,str.length());
                     System.out.println(CatCode);
                     System.out.println("!=");}
                     //跳过已经成功判断的字符
